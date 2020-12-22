@@ -24,6 +24,12 @@ public class ReportWriter implements Tasklet, StepExecutionListener {
     @Override
     public RepeatStatus execute(StepContribution stepContribution, ChunkContext chunkContext) throws Exception {
         //TODO montar file de relatório
+
+        System.out.println("pior vendedor: " + analiseDados.obterPiorVendedor().getNome()+ " documento: "+ analiseDados.obterPiorVendedor().getNumeroDocumento());
+        System.out.println("qtd clientes: " + analiseDados.obterQuantidadeClientes());
+        System.out.println("qtd vendedores: " + analiseDados.obterQuantidadeVendedores());
+        System.out.println("venda mais cara: " + analiseDados.obterIdVendaMaisCara());
+
         return RepeatStatus.FINISHED;
     }
 

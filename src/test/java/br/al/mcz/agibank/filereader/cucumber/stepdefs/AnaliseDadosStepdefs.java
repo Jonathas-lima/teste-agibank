@@ -1,6 +1,7 @@
 package br.al.mcz.agibank.filereader.cucumber.stepdefs;
 
 import br.al.mcz.agibank.filereader.config.BatchConfiguration;
+import br.al.mcz.agibank.filereader.cucumber.SpringIntegrationTest;
 import br.al.mcz.agibank.filereader.util.ThreadUtil;
 import io.cucumber.java.pt.Dado;
 import io.cucumber.java.pt.Então;
@@ -21,7 +22,7 @@ import static java.lang.String.valueOf;
 import static java.lang.System.currentTimeMillis;
 
 
-public class AnaliseDadosStepdefs {
+public class AnaliseDadosStepdefs extends SpringIntegrationTest {
 
     @Autowired
     SimpleJobLauncher jobLauncher;

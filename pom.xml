@@ -17,6 +17,7 @@
     <properties>
         <java.version>1.8</java.version>
         <lombok.version>1.18.12</lombok.version>
+        <cucumber.version>6.8.0</cucumber.version>
     </properties>
 
     <dependencies>
@@ -56,20 +57,26 @@
         <!-- Cucumber -->
         <dependency>
             <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-core</artifactId>
+            <version>${cucumber.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
-            <version>6.8.0</version>
+            <version>${cucumber.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-junit</artifactId>
-            <version>6.8.0</version>
+            <version>${cucumber.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-spring</artifactId>
-            <version>6.8.0</version>
+            <version>${cucumber.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

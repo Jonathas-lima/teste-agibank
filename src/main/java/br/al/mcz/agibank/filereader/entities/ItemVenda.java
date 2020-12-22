@@ -14,9 +14,4 @@ public class ItemVenda implements Entidade, Serializable {
     private BigDecimal preco;
     private Integer quantidade = 1;
 
-
-    @Override
-    public void printClass() {
-        System.out.println(this.getClass().getName());
-    }
 }

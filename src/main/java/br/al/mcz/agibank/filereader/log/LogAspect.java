@@ -1,44 +1,33 @@
 package br.al.mcz.agibank.filereader.log;
 
-import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-@Aspect
+
 @Component
-@Slf4j
+@Aspect
 public class LogAspect {
 
-//    @Pointcut("execution(* mapLine(..))")
-//    private void mapLinePointCut() {}
-//
-//    @Pointcut("execution(* process(..))")
-//    private void processPointCut() {}
-//
-//    @Pointcut("execution(* fromStringList(..))")
-//    private void fromStringList() {}
-//
-//    @Before("mapLinePointCut()")
-//    private void beforeMapLine(JoinPoint joinPoint) {
-//        Object[] args = joinPoint.getArgs();
-//        log.debug(String.format("Mapping line %s: %s", args[1], args[0]));
-//    }
-//
-//    @Before("processPointCut()")
-//    private void beforeProcess(JoinPoint joinPoint) {
-//        log.debug("Processing record: " + joinPoint.getArgs()[0].toString());
-//    }
-//
-//    @Before("fromStringList()")
-//    private void beforeFromStringList(JoinPoint joinPoint) {
-//        log.debug("Converting record attributes: " + joinPoint.getArgs()[0].toString());
-//    }
-//
-//    @AfterReturning(pointcut = "processPointCut()", returning = "entity")
-//    private void afterFromStringList(JoinPoint joinPoint, Object entity) {
-//        log.debug("Converted entity: " + entity.toString());
-//    }
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
+
+    @Pointcut("execution(* decodificar(..))")
+    private void executarDecodificar() {}
+
+    @Before("executarDecodificar()")
+    private void antesDecodificar(JoinPoint joinPoint) {
+        log.info("Convertendo dados: " + joinPoint.getArgs()[0].toString());
+    }
+
+    @AfterReturning(pointcut = "executarDecodificar()", returning = "entidade")
+    private void depoisDecodificar(JoinPoint joinPoint, Object entidade) {
+        log.info("Entidade convertida: " + entidade.toString());
+    }
 
 
 }

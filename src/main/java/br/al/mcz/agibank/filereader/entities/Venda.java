@@ -23,8 +23,4 @@ public class Venda implements Entidade, Serializable {
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
-    @Override
-    public void printClass() {
-        System.out.println(this.getClass().getName());
-    }
 }

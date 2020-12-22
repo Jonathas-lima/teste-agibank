@@ -15,9 +15,9 @@ import static java.util.Comparator.comparing;
 @Builder
 public class AnaliseDados implements Serializable {
 
-    private List<Venda> vendas;
-    private List<Cliente> clientes;
-    private List<Vendedor> vendedores;
+    private final List<Venda> vendas;
+    private final List<Cliente> clientes;
+    private final List<Vendedor> vendedores;
 
     public Integer obterQuantidadeClientes() {
         return clientes.size();
@@ -47,7 +47,7 @@ public class AnaliseDados implements Serializable {
     private String obterNomePiorVendedor(Map<String, BigDecimal> valores){
         return  valores.entrySet()
                 .stream()
-                .max(Map.Entry.comparingByValue())
+                .min(Map.Entry.comparingByValue())
                 .orElseThrow(VendedorNaoEncontradoException::new).getKey();
     }
 
@@ -62,6 +62,13 @@ public class AnaliseDados implements Serializable {
             valorVendaPorVendedor.put(vendedor.getNome(), valorVendas);
         });
         return valorVendaPorVendedor;
+    }
+
+    public String obterResumoAnalise() {
+        return "Quantidade de clientes: " + this.obterQuantidadeClientes() + "\n" +
+               "Quantidade de vendedores: " + this.obterQuantidadeVendedores() + "\n" +
+               "Pior vendedor: " + this.obterPiorVendedor().getNome()+ " ** Número do documento: "+ this.obterPiorVendedor().getNumeroDocumento() + "\n" +
+               "ID venda mais cara: " + this.obterIdVendaMaisCara();
     }
 
 }

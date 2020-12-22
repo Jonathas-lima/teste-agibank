@@ -23,5 +23,7 @@ public enum TipoDado {
                 .orElseThrow(TipoDadoInvalidoException::new);
     }
 
-
+    public static TipoDado obterTipoDadoPorLinha(String dados) {
+        return obterPorCodigo(dados.substring(0, 3));
+    }
 }

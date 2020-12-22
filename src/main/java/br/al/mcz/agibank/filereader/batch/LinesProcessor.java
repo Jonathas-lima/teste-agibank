@@ -3,10 +3,10 @@ package br.al.mcz.agibank.filereader.batch;
 import br.al.mcz.agibank.filereader.entities.*;
 import br.al.mcz.agibank.filereader.entities.types.TipoDado;
 import br.al.mcz.agibank.filereader.exceptions.TipoDadoInvalidoException;
-import br.al.mcz.agibank.filereader.services.DecodificadorDados;
-import br.al.mcz.agibank.filereader.services.impl.DecodificadorDadosCliente;
-import br.al.mcz.agibank.filereader.services.impl.DecodificadorDadosVenda;
-import br.al.mcz.agibank.filereader.services.impl.DecodificadorDadosVendedor;
+import br.al.mcz.agibank.filereader.services.DecodificadorDadosService;
+import br.al.mcz.agibank.filereader.services.impl.DecodificadorDadosServiceCliente;
+import br.al.mcz.agibank.filereader.services.impl.DecodificadorDadosServiceVenda;
+import br.al.mcz.agibank.filereader.services.impl.DecodificadorDadosServiceVendedor;
 import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.StepExecution;
@@ -18,9 +18,7 @@ import org.springframework.batch.repeat.RepeatStatus;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
-
-import static br.al.mcz.agibank.filereader.entities.types.TipoDado.obterPorCodigo;
+import static br.al.mcz.agibank.filereader.entities.types.TipoDado.obterTipoDadoPorLinha;
 
 public class LinesProcessor implements Tasklet, StepExecutionListener {
 
@@ -74,22 +72,18 @@ public class LinesProcessor implements Tasklet, StepExecutionListener {
 
 
     private Entidade process(String linha) {
-        DecodificadorDados<?> decodificadorDados = obterDecodificador(obterTipoDado(linha));
+        DecodificadorDadosService<?> decodificadorDados = obterDecodificador(obterTipoDadoPorLinha(linha));
         return (Entidade) decodificadorDados.decodificar(linha);
     }
 
-    private TipoDado obterTipoDado(String dados) {
-        return obterPorCodigo(dados.substring(0, 3));
-    }
-
-    private DecodificadorDados<?> obterDecodificador(TipoDado tipo) {
+    private DecodificadorDadosService<?> obterDecodificador(TipoDado tipo) {
         switch (tipo) {
             case VENDEDOR:
-                return new DecodificadorDadosVendedor();
+                return new DecodificadorDadosServiceVendedor();
             case VENDA:
-                return new DecodificadorDadosVenda();
+                return new DecodificadorDadosServiceVenda();
             case CLIENTE:
-                return new DecodificadorDadosCliente();
+                return new DecodificadorDadosServiceCliente();
             default:
                 throw new TipoDadoInvalidoException();
         }

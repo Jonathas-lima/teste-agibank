@@ -1,6 +1,7 @@
 package br.al.mcz.agibank.filereader.batch;
 
 import br.al.mcz.agibank.filereader.exceptions.ArquivoVazioException;
+import br.al.mcz.agibank.filereader.log.LogExecutionTime;
 import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.StepExecution;
@@ -24,6 +25,7 @@ public class LinesReader implements Tasklet, StepExecutionListener {
     }
 
     @Override
+    @LogExecutionTime
     public RepeatStatus execute(StepContribution stepContribution, ChunkContext chunkContext) throws Exception {
         lines = readFiles(path);
         validarDadosArquivo();

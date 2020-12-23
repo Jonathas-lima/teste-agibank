@@ -3,6 +3,7 @@ package br.al.mcz.agibank.filereader.batch;
 import br.al.mcz.agibank.filereader.entities.*;
 import br.al.mcz.agibank.filereader.entities.types.TipoDado;
 import br.al.mcz.agibank.filereader.exceptions.TipoDadoInvalidoException;
+import br.al.mcz.agibank.filereader.log.LogExecutionTime;
 import br.al.mcz.agibank.filereader.services.DecodificadorDadosService;
 import br.al.mcz.agibank.filereader.services.impl.DecodificadorDadosServiceCliente;
 import br.al.mcz.agibank.filereader.services.impl.DecodificadorDadosServiceVenda;
@@ -18,6 +19,7 @@ import org.springframework.batch.repeat.RepeatStatus;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
 import static br.al.mcz.agibank.filereader.entities.types.TipoDado.obterTipoDadoPorLinha;
 
 public class LinesProcessor implements Tasklet, StepExecutionListener {
@@ -36,6 +38,7 @@ public class LinesProcessor implements Tasklet, StepExecutionListener {
     }
 
     @Override
+    @LogExecutionTime
     public RepeatStatus execute(StepContribution stepContribution, ChunkContext chunkContext) {
 
         entidades = lines.stream()

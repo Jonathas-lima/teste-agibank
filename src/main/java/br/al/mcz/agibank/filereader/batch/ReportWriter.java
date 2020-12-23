@@ -11,7 +11,6 @@ import org.springframework.batch.item.ExecutionContext;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.beans.factory.annotation.Value;
 
-
 import static br.al.mcz.agibank.filereader.util.FileUtil.writeFile;
 
 public class ReportWriter implements Tasklet, StepExecutionListener {

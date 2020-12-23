@@ -24,51 +24,36 @@ public class BatchConfiguration {
     private StepBuilderFactory stepBuilderFactory;
 
     @Bean
-    public Job job() {
+    public Job job(LinesReader linesReader, LinesProcessor linesProcessor, ReportWriter linesWriter) {
         return jobBuilderFactory
                 .get("taskletsJob")
-                .start(readLines())
-                .next(processLines())
-                .next(writeLines())
+                .start(readLines(linesReader))
+                .next(processLines(linesProcessor))
+                .next(writeLines(linesWriter))
                 .build();
     }
 
     @Bean
-    protected Step readLines() {
+    protected Step readLines(LinesReader linesReader) {
         return stepBuilderFactory
                 .get("readLines")
-                .tasklet(linesReader())
+                .tasklet(linesReader)
                 .build();
     }
 
     @Bean
-    protected Step processLines() {
+    protected Step processLines(LinesProcessor linesProcessor) {
         return stepBuilderFactory
                 .get("processLines")
-                .tasklet(linesProcessor())
+                .tasklet(linesProcessor)
                 .build();
     }
 
     @Bean
-    protected Step writeLines() {
+    protected Step writeLines(ReportWriter linesWriter) {
         return stepBuilderFactory
                 .get("writeLines")
-                .tasklet(linesWriter())
+                .tasklet(linesWriter)
                 .build();
-    }
-
-    @Bean
-    public LinesReader linesReader(){
-        return new LinesReader();
-    }
-
-    @Bean
-    public LinesProcessor linesProcessor() {
-        return new LinesProcessor();
-    }
-
-    @Bean
-    public ReportWriter linesWriter(){
-        return new ReportWriter();
     }
 }

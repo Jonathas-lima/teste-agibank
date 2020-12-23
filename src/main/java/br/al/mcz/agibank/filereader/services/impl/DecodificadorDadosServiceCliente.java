@@ -2,11 +2,13 @@ package br.al.mcz.agibank.filereader.services.impl;
 
 import br.al.mcz.agibank.filereader.entities.Cliente;
 import br.al.mcz.agibank.filereader.services.DecodificadorDadosService;
+import org.springframework.stereotype.Service;
 
 import static br.al.mcz.agibank.filereader.entities.types.TipoDado.CLIENTE;
 import static br.al.mcz.agibank.filereader.entities.types.TipoDado.obterTipoDadoPorLinha;
 import static br.al.mcz.agibank.filereader.shared.Constantes.Separadores.SEPARDOR_DADOS;
 
+@Service
 public class DecodificadorDadosServiceCliente implements DecodificadorDadosService<Cliente> {
 
     @Override

@@ -1,9 +1,10 @@
 package br.al.mcz.agibank.filereader.log;
 
 import lombok.extern.log4j.Log4j2;
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -18,7 +19,12 @@ public class LoggingAspect {
 
     }
 
-    @Around("applicationPackagePointcut()")
+    @Pointcut("within(@org.springframework.stereotype.Service *)")
+    public void springBeanPointcut() {
+
+    }
+
+    @Around("applicationPackagePointcut() && springBeanPointcut()")
     public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
         if (log.isDebugEnabled()) {
             log.debug("Enter: {}.{}() with argument[s] = {}", joinPoint.getSignature().getDeclaringTypeName(),
@@ -37,7 +43,6 @@ public class LoggingAspect {
             throw e;
         }
     }
-
 
 
 }

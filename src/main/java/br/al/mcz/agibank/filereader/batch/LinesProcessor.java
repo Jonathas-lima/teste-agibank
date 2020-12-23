@@ -16,17 +16,31 @@ import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.item.ExecutionContext;
 import org.springframework.batch.repeat.RepeatStatus;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static br.al.mcz.agibank.filereader.entities.types.TipoDado.obterTipoDadoPorLinha;
 
+@Component
 public class LinesProcessor implements Tasklet, StepExecutionListener {
 
     private List<String> lines;
     private List<Entidade> entidades;
     private AnaliseDados analiseDados;
+
+    private final DecodificadorDadosServiceVendedor decodificadorDadosServiceVendedor;
+    private final DecodificadorDadosServiceCliente decodificadorDadosServiceCliente;
+    private final DecodificadorDadosServiceVenda decodificadorDadosServiceVenda;
+
+    public LinesProcessor(DecodificadorDadosServiceVendedor decodificadorDadosServiceVendedor,
+                          DecodificadorDadosServiceCliente decodificadorDadosServiceCliente,
+                          DecodificadorDadosServiceVenda decodificadorDadosServiceVenda) {
+        this.decodificadorDadosServiceVendedor = decodificadorDadosServiceVendedor;
+        this.decodificadorDadosServiceCliente = decodificadorDadosServiceCliente;
+        this.decodificadorDadosServiceVenda = decodificadorDadosServiceVenda;
+    }
 
     @Override
     public void beforeStep(StepExecution stepExecution) {
@@ -82,11 +96,11 @@ public class LinesProcessor implements Tasklet, StepExecutionListener {
     private DecodificadorDadosService<?> obterDecodificador(TipoDado tipo) {
         switch (tipo) {
             case VENDEDOR:
-                return new DecodificadorDadosServiceVendedor();
+                return decodificadorDadosServiceVendedor;
             case VENDA:
-                return new DecodificadorDadosServiceVenda();
+                return decodificadorDadosServiceVenda;
             case CLIENTE:
-                return new DecodificadorDadosServiceCliente();
+                return decodificadorDadosServiceCliente;
             default:
                 throw new TipoDadoInvalidoException();
         }

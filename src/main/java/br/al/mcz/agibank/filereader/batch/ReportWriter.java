@@ -10,9 +10,11 @@ import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.item.ExecutionContext;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import static br.al.mcz.agibank.filereader.util.FileUtil.writeFile;
 
+@Component
 public class ReportWriter implements Tasklet, StepExecutionListener {
 
     @Value("${diretorio.saida}")

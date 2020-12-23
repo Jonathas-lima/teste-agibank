@@ -9,7 +9,7 @@ import io.cucumber.java.pt.Quando;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersBuilder;
-import org.springframework.batch.core.launch.support.SimpleJobLauncher;
+import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
@@ -25,7 +25,7 @@ import static java.lang.System.currentTimeMillis;
 public class AnaliseDadosStepdefs extends SpringIntegrationTest {
 
     @Autowired
-    SimpleJobLauncher jobLauncher;
+    JobLauncher jobLauncher;
 
     @Autowired
     BatchConfiguration batchConfiguration;

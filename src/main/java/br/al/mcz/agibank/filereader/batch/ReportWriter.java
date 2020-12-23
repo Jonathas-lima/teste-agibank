@@ -30,14 +30,12 @@ public class ReportWriter implements Tasklet, StepExecutionListener {
 
     @Override
     public RepeatStatus execute(StepContribution stepContribution, ChunkContext chunkContext) throws Exception {
-        diretorioSaida = "/home/jonathas/homepath/data/out/output.dat";
         writeFile(diretorioSaida, "Relatório Análise dados", analiseDados.obterResumoAnalise());
         return RepeatStatus.FINISHED;
     }
 
     @Override
     public ExitStatus afterStep(StepExecution stepExecution) {
-        //TODO salvar arquivo
         return ExitStatus.COMPLETED;
     }
 

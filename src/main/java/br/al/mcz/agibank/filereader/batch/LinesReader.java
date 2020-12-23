@@ -1,5 +1,6 @@
 package br.al.mcz.agibank.filereader.batch;
 
+import br.al.mcz.agibank.filereader.exceptions.ArquivoVazioException;
 import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.StepExecution;
@@ -24,9 +25,8 @@ public class LinesReader implements Tasklet, StepExecutionListener {
 
     @Override
     public RepeatStatus execute(StepContribution stepContribution, ChunkContext chunkContext) throws Exception {
-        path = "/home/jonathas/homepath/data/in";
-//        path = System.getenv("HOMEPATH") + "/data/in";
         lines = readFiles(path);
+        validarDadosArquivo();
         return RepeatStatus.FINISHED;
     }
 
@@ -37,5 +37,11 @@ public class LinesReader implements Tasklet, StepExecutionListener {
                 .getExecutionContext()
                 .put("lines", this.lines);
         return ExitStatus.COMPLETED;
+    }
+
+    private void validarDadosArquivo() {
+        if(this.lines.isEmpty()){
+            throw new ArquivoVazioException();
+        }
     }
 }

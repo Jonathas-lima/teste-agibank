@@ -22,6 +22,7 @@ public class FileUtil {
 
             return paths
                     .filter(Files::isRegularFile)
+                    .filter(p -> p.getFileName().toString().endsWith(".dat"))
                     .map(FileUtil::readFilesFromPath)
                     .flatMap(List::stream)
                     .collect(Collectors.toList());

@@ -44,6 +44,7 @@ public class FileUtil {
 
     public static void writeFile(String path, String titulo, String texto) throws ArquivoNaoEncontradoException {
         try {
+            createOutputFilePath(path);
             FileWriter fileWriter = new FileWriter(path);
             PrintWriter printWriter = new PrintWriter(fileWriter);
             printWriter.println("**** " + titulo + "****");
@@ -54,5 +55,15 @@ public class FileUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private static Path createOutputFilePath(String outputFile) throws IOException {
+        Path outputFilePath = Paths.get(outputFile);
+
+        Files.createDirectories(outputFilePath.getParent());
+        if (!Files.exists(outputFilePath)) {
+            Files.createFile(outputFilePath);
+        }
+        return outputFilePath;
     }
 }

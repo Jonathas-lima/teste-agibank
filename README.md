@@ -25,14 +25,14 @@ ps. o processador ficará executando em loop, a cada minuto, tempo que pode ser 
 
 5. Para rodar os testes automáticos executar o comando: ./mvnw clean test
 
-##Informações
+## Informações
 
-####Logs
+#### Logs
 Os logs foram implementados utilizando OAP. Os logs de processamento serão exibidos quando o nível for DEBUG e caso haja excecção o nível é ERROR.
 O nível pode ser definido alterando o arquivo de propriedades da aplicação ou passando como argumento.
 ex: ./mvnw clean spring-boot:run -Dspring-boot.run.arguments=--logging.level.root=DEBUG
 
-####Executando com o Docker
+#### Executando com o Docker
 Para criação da imagem docker: docker build -t agibank .
 
 para instanciar um container docker: docker run --name agibank-teste --mount type=bind,source="HOMEPATH",target=/homepath agibank
@@ -44,12 +44,12 @@ para instanciar um container docker: docker run --name agibank-teste --mount typ
 ## Exemplos  
 - O arquivo de dados deve ter a extensão .dat para ser lido, as demais extensões serão ignoradas, e deve conter linhas como no exemplo abaixo:  
 ```  
-001ç1234567891234çPedroç50000  
-001ç3245678865434çPauloç40000.99  
-002ç2345675434544345çJose da SilvaçRural  
-002ç2345675433444345çEduardo PereiraçRural  
-003ç10ç[1-10-100,2-30-2.50,3-40-3.10]çPedro  
-003ç08ç[1-34-10,2-33-1.50,3-40-0.10]çPaulo  
+001ç1234567891234çJoãoç50000
+001ç3245678865434çMatheusç40000.99
+002ç2345675434544345çJose da SilvaçRural
+002ç2345675433444345çEduardo PereiraçRural
+003ç10ç[1-10-100,2-30-2.50,3-40-3.10]çJoão
+003ç08ç[1-34-100,2-33-1.50,3-40-0.10]çMatheus 
 ```  
  O mesmo deve estar dentro de `homepath/data/in`
  

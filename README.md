@@ -17,28 +17,28 @@ A aplicação desenvolvida é um processador de arquivos com dados de vendas que
   
 ### Execução  
 1. Clonar o repositório com o seguinte comando: `https://github.com/Jonathas-lima/teste-agibank.git`  
-2. Criar uma variável de ambiente HOMEPATH, onde a mesma aponta para a pasta homepath contendo os arquivos data/in e data/out
+2. Criar uma variável de ambiente `HOMEPATH`, onde a mesma aponta para a pasta homepath contendo os arquivos `data/in` e `data/out`
 3. Conceder permissão de escrita e leitura nas pastas dentro de homepath
-4. Executar o comando na raiz do projeto: /mvnw clean spring-boot:run
+4. Executar o comando na raiz do projeto: `./mvnw clean spring-boot:run`
 
 ps. o processador ficará executando em loop, a cada minuto, tempo que pode ser alterado no arquivo de configuração do projeto.
 
-5. Para rodar os testes automáticos executar o comando: ./mvnw clean test
+5. Para rodar os testes automáticos executar o comando: `./mvnw clean test`
 
 ## Informações
 
 #### Logs
-Os logs foram implementados utilizando OAP. Os logs de processamento serão exibidos quando o nível for DEBUG e caso haja excecção o nível é ERROR.
+Os logs foram implementados utilizando OAP. Os logs de processamento serão exibidos quando o nível for `DEBUG` e caso haja excecção o nível é `ERROR`.
 O nível pode ser definido alterando o arquivo de propriedades da aplicação ou passando como argumento.
-ex: ./mvnw clean spring-boot:run -Dspring-boot.run.arguments=--logging.level.root=DEBUG
+ex: `./mvnw clean spring-boot:run -Dspring-boot.run.arguments=--logging.level.root=DEBUG`
 
 #### Executando com o Docker
-Para criação da imagem docker: docker build -t agibank .
+Para criação da imagem docker: `docker build -t agibank .`
 
-para instanciar um container docker: docker run --name agibank-teste --mount type=bind,source="HOMEPATH",target=/homepath agibank
+para instanciar um container docker: `docker run --name agibank-teste --mount type=bind,source="HOMEPATH",target=/homepath agibank`
                                      
  Onde HOMEPATH é o diretório no host que contém os diretórios de entrada e saída.                                  
- OBS: Conceder permissão de escrita e leitura no diretório HOMEPATH  
+ OBS: Conceder permissão de escrita e leitura no diretório `HOMEPATH`  
  
   
 ## Exemplos  

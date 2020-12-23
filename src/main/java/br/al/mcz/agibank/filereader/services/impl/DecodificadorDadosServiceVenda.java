@@ -3,7 +3,6 @@ package br.al.mcz.agibank.filereader.services.impl;
 import br.al.mcz.agibank.filereader.entities.ItemVenda;
 import br.al.mcz.agibank.filereader.entities.Venda;
 import br.al.mcz.agibank.filereader.services.DecodificadorDadosService;
-import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -16,7 +15,6 @@ import static br.al.mcz.agibank.filereader.shared.Constantes.REGEX_COLCHETES;
 import static br.al.mcz.agibank.filereader.shared.Constantes.STRING_VAZIA;
 import static br.al.mcz.agibank.filereader.shared.Constantes.Separadores.*;
 
-@Component
 public class DecodificadorDadosServiceVenda implements DecodificadorDadosService<Venda> {
 
     @Override

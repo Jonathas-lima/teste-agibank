@@ -16,7 +16,7 @@ A aplicação desenvolvida é um processador de arquivos com dados de vendas que
 - Git
   
 ### Execução  
-1. Clonar o repositório com o seguinte comando: `https://github.com/Jonathas-lima/teste-agibank.git`  
+1. Clonar o repositório: `https://github.com/Jonathas-lima/teste-agibank.git`  
 2. Criar um diretório com o nome `data` em sua home.
 3. Conceder permissão de escrita e leitura na pasta criada
 4. Executar o comando na raiz do projeto: `./mvnw clean spring-boot:run`
@@ -25,13 +25,6 @@ ps. o processador ficará executando em loop, a cada minuto, tempo que pode ser 
 
 5. Para rodar os testes automáticos executar o comando: `./mvnw clean test`
 
-## Informações
-
-#### Logs
-Os logs foram implementados utilizando OAP. Os logs de processamento serão exibidos quando o nível for `DEBUG` e caso haja excecção o nível é `ERROR`.
-O nível pode ser definido alterando o arquivo de propriedades da aplicação ou passando como argumento.
-ex: `./mvnw clean spring-boot:run -Dspring-boot.run.arguments=--logging.level.root=DEBUG`
-
 #### Executando com o Docker
 1. Entrar no diretório raiz do projeto
 1. Compilar o projeto com o comando: `./mvnw clean package`
@@ -39,8 +32,16 @@ ex: `./mvnw clean spring-boot:run -Dspring-boot.run.arguments=--logging.level.ro
 2. Para criação da imagem docker: `docker build -t agibank .`
 
 3. para instanciar um container docker: `docker run --name agibank-teste --mount type=bind,source="$HOME/data",target=/root/data/ agibank`
+
+## Informações
+
+#### Logs
+Os logs foram implementados utilizando OAP. Os logs de processamento serão exibidos quando o nível for `DEBUG` e caso haja excecção o nível é `ERROR`.
+O nível pode ser definido alterando o arquivo de propriedades da aplicação ou passando como argumento.
+ex: `./mvnw clean spring-boot:run -Dspring-boot.run.arguments=--logging.level.root=DEBUG`
+
   
-## Exemplos  
+#### Exemplos  
 - O arquivo de dados deve ter a extensão .dat para ser lido, as demais extensões serão ignoradas, e deve conter linhas como no exemplo abaixo:  
 ```  
 001ç1234567891234çJoãoç50000

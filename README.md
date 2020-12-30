@@ -54,6 +54,7 @@ ex: `./mvnw clean spring-boot:run -Dspring-boot.run.arguments=--logging.level.ro
 ```  
  O mesmo deve estar dentro de `"$HOME"/data/in`
  
+ OBS: Caso não exista um arquivo de entrada na pasta, acima citada, o processador lancará uma exceção e continuará a execução.
  
 - O resultado do processamento gerará o seguinte conteúdo em um arquivo .dat localizado em:  `"$HOME"/data/out`  
 ```  

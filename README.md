@@ -18,7 +18,8 @@ A aplicação desenvolvida é um processador de arquivos com dados de vendas que
 ### Execução  
 1. Clonar o repositório: `https://github.com/Jonathas-lima/teste-agibank.git`  
 2. Criar um diretório com o nome `data` em sua home.
-3. Conceder permissão de escrita e leitura na pasta criada
+3. Criar um diretório `in` dentro da pasta do passo 1 e salvar o arquivo com dados de teste nela.
+3. Conceder permissão de escrita e leitura nas pastas criadas
 4. Executar o comando na raiz do projeto: `./mvnw clean spring-boot:run`
 
 ps. o processador ficará executando em loop, a cada minuto, tempo que pode ser alterado no arquivo de configuração do projeto.

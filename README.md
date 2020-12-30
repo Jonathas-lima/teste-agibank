@@ -17,8 +17,8 @@ A aplicação desenvolvida é um processador de arquivos com dados de vendas que
   
 ### Execução  
 1. Clonar o repositório com o seguinte comando: `https://github.com/Jonathas-lima/teste-agibank.git`  
-2. Criar uma variável de ambiente `HOMEPATH`, onde a mesma aponta para a pasta homepath contendo os arquivos `data/in` e `data/out`
-3. Conceder permissão de escrita e leitura nas pastas dentro de homepath
+2. Criar um diretório com o nome `data` em sua home.
+3. Conceder permissão de escrita e leitura na pasta criada
 4. Executar o comando na raiz do projeto: `./mvnw clean spring-boot:run`
 
 ps. o processador ficará executando em loop, a cada minuto, tempo que pode ser alterado no arquivo de configuração do projeto.
@@ -33,13 +33,12 @@ O nível pode ser definido alterando o arquivo de propriedades da aplicação ou
 ex: `./mvnw clean spring-boot:run -Dspring-boot.run.arguments=--logging.level.root=DEBUG`
 
 #### Executando com o Docker
-Para criação da imagem docker: `docker build -t agibank .`
+1. Entrar no diretório raiz do projeto
+1. Compilar o projeto com o comando: `./mvnw clean package`
 
-para instanciar um container docker: `docker run --name agibank-teste --mount type=bind,source="HOMEPATH",target=/homepath agibank`
-                                     
- Onde HOMEPATH é o diretório no host que contém os diretórios de entrada e saída.                                  
- OBS: Conceder permissão de escrita e leitura no diretório `HOMEPATH`  
- 
+2. Para criação da imagem docker: `docker build -t agibank .`
+
+3. para instanciar um container docker: `docker run --name agibank-teste --mount type=bind,source="$HOME/data",target=/root/data/ agibank`
   
 ## Exemplos  
 - O arquivo de dados deve ter a extensão .dat para ser lido, as demais extensões serão ignoradas, e deve conter linhas como no exemplo abaixo:  
@@ -51,10 +50,10 @@ para instanciar um container docker: `docker run --name agibank-teste --mount ty
 003ç10ç[1-10-100,2-30-2.50,3-40-3.10]çJoão
 003ç08ç[1-34-100,2-33-1.50,3-40-0.10]çMatheus 
 ```  
- O mesmo deve estar dentro de `homepath/data/in`
+ O mesmo deve estar dentro de `"$HOME"/data/in`
  
  
-- O resultado do processamento gerará o seguinte conteúdo em um arquivo .dat localizado em:  `homepath/data/out`  
+- O resultado do processamento gerará o seguinte conteúdo em um arquivo .dat localizado em:  `"$HOME"/data/out`  
 ```  
 **** Relatório Análise dados****
 Quantidade de clientes: 2
